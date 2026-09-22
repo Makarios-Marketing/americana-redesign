@@ -1,0 +1,758 @@
+<title>Americana Iron Works</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+:root{
+  --navy:#0A2A4E;--navy-800:#08213D;--navy-600:#1B456F;--steel:#3E5C80;
+  --red:#D81E28;--red-dark:#B4141D;--red-pale:#FFB4B8;
+  --ink:#0E1522;--slate:#566476;--slate-light:#8C97A6;
+  --line:#E5E9F0;--soft:#F4F7FB;--white:#FFFFFF;
+  --amber-bg:#FDF0CE;--amber-line:#C79A4A;--amber-ink:#6B4A14;
+  --display:'Barlow Condensed','Oswald','Arial Narrow',sans-serif;
+  --body:'Karla','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --wrap:1200px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--navy);text-decoration:none}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;text-wrap:balance;margin:0}
+p{margin:0}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:20px}
+.sect{padding-block:clamp(48px,7vw,86px)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.2em;color:var(--red);text-transform:uppercase;margin-bottom:14px}
+.eyebrow::before{content:"";width:34px;height:3px;background:var(--red);flex:none}
+.h2{font-size:clamp(29px,4.3vw,48px);font-weight:700;line-height:1.05;color:var(--navy)}
+.lede{margin-top:14px;font-size:clamp(16px,1.6vw,18px);line-height:1.7;color:var(--slate);max-width:66ch}
+.center{text-align:center}
+.center .eyebrow{justify-content:center}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 26px;font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:2px solid transparent;cursor:pointer;transition:background .15s,color .15s}
+.btn-red{background:var(--red);color:var(--white)}
+.btn-red:hover{background:var(--red-dark);color:var(--white)}
+.btn-navy{background:var(--navy);color:var(--white)}
+.btn-navy:hover{background:var(--navy-800);color:var(--white)}
+.btn-ghost{background:transparent;color:var(--white);border-color:var(--steel)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);color:var(--white)}
+.btn-outline{background:transparent;color:var(--navy);border-color:var(--navy)}
+.btn-outline:hover{background:var(--navy);color:var(--white)}
+
+.util{background:var(--navy);color:#C3CEDC;font-size:13px}
+.util .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:40px;padding-block:8px;flex-wrap:wrap}
+.util ul{display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.util li+li::before{content:"|";color:var(--navy-600);margin-right:8px}
+.util a{color:var(--red-pale)}
+@media (max-width:900px){.util .wrap>span:last-child{display:none}}
+
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--white);border-bottom:1px solid var(--line)}
+.hdr .wrap{display:flex;align-items:center;gap:18px;min-height:82px}
+.logo img{width:196px;height:54px;object-fit:contain;object-position:left center}
+.nav{margin-left:auto;display:flex;align-items:center;gap:22px;font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.nav a{color:var(--ink);padding-block:6px;border-bottom:3px solid transparent}
+.nav a:hover{border-bottom-color:var(--line)}
+.nav a.is-key{color:var(--red);border-bottom-color:var(--red)}
+.hdr-cta{display:flex;align-items:center;gap:14px}
+.tel-block{display:flex;flex-direction:column;line-height:1.2;text-align:right}
+.tel-block span{font-size:10.5px;letter-spacing:.16em;color:var(--slate);text-transform:uppercase}
+.tel-block strong{font-family:var(--display);font-size:23px;font-weight:700;color:var(--navy)}
+.burger{display:none;margin-left:auto;width:52px;height:52px;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--line);cursor:pointer}
+@media (max-width:1140px){.nav{display:none}.burger{display:inline-flex}.hdr-cta .btn{display:none}.hdr-cta{order:2}}
+@media (max-width:560px){.tel-block{display:none}.logo img{width:152px;height:44px}}
+.mnav{display:none;background:var(--navy);border-bottom:4px solid var(--red)}
+.mnav[data-open="true"]{display:block}
+.mnav ul{list-style:none;margin:0;padding:8px 20px 12px;display:flex;flex-direction:column}
+.mnav a{display:block;padding:15px 0;color:var(--white);font-family:var(--display);font-size:20px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--navy-600)}
+.mnav .btn{width:100%;margin-bottom:20px}
+
+.hero{background:var(--navy);color:var(--white);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:0;align-items:stretch}
+.hero-copy{padding-block:clamp(42px,5.4vw,74px);padding-right:clamp(24px,4vw,54px);display:flex;flex-direction:column;justify-content:center}
+.hero .eyebrow{color:var(--red-pale)}
+.hero h1{font-size:clamp(36px,5.6vw,66px);font-weight:800;line-height:1;color:var(--white)}
+.hero p{margin-top:18px;font-size:clamp(16px,1.7vw,19px);line-height:1.6;color:#C3CEDC;max-width:56ch}
+.hero p strong{color:var(--white);font-weight:700}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero-ticks{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:28px;font-size:14px;color:#A9BACB;list-style:none;padding:0}
+.hero-ticks li{display:flex;align-items:center;gap:8px}
+.hero-media{position:relative;min-height:340px}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.badge-year{position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:12px;background:var(--white);padding:12px 18px;box-shadow:0 8px 28px rgba(8,33,61,.4)}
+.badge-year b{font-family:var(--display);font-size:38px;font-weight:800;color:var(--red);line-height:1}
+.badge-year span{font-size:12.5px;line-height:1.35;color:var(--ink)}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-copy{padding-right:0;padding-bottom:34px}.hero-media{min-height:0;margin-inline:-20px}.hero-media img{position:static;height:300px}.badge-year{left:20px}}
+
+.proof{background:var(--soft);border-bottom:1px solid var(--line)}
+.proof .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding-block:28px}
+.proof-item{padding-right:20px;border-right:1px solid var(--line)}
+.proof-item:last-child{border-right:0;padding-right:0}
+.proof-num{font-family:var(--display);font-size:clamp(30px,3.6vw,42px);font-weight:800;color:var(--navy);line-height:1;font-variant-numeric:tabular-nums}
+.proof-num .accent{color:var(--red)}
+.proof-lbl{font-size:14px;color:var(--slate);margin-top:6px}
+@media (max-width:640px){.proof .wrap{grid-template-columns:1fr;gap:16px}.proof-item{border-right:0;padding-right:0;display:flex;align-items:baseline;gap:12px}.proof-lbl{margin-top:0}}
+
+@media (max-width:620px){}
+
+.sect-head{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;margin-bottom:38px}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:var(--white);border:1px solid var(--line);display:flex;flex-direction:column}
+.card img{width:100%;height:210px;object-fit:cover}
+.card-body{padding:24px 24px 28px;border-top:4px solid var(--red);display:flex;flex-direction:column;gap:10px;flex:1}
+.card-body h3{font-size:24px;font-weight:700;color:var(--navy)}
+.card-body p{font-size:15.5px;color:var(--slate)}
+@media (max-width:900px){.cards-3{grid-template-columns:1fr}}
+
+.callout{margin-top:34px;background:var(--navy);color:var(--white);padding:clamp(24px,3vw,34px) clamp(20px,3vw,42px);display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap}
+.callout h3{font-size:clamp(22px,2.6vw,28px);font-weight:700;color:var(--white)}
+.callout p{margin-top:6px;font-size:16px;color:#C3CEDC;max-width:62ch}
+
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.svc{background:var(--white);border:1px solid var(--line);display:flex;flex-direction:column;transition:border-color .15s,transform .15s}
+.svc:hover{border-color:var(--navy);transform:translateY(-3px)}
+.svc img{width:100%;height:150px;object-fit:cover}
+.svc-body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:7px}
+.svc-body h3{font-size:22px;font-weight:700;color:var(--navy)}
+.svc-body p{font-size:14.5px;color:var(--slate)}
+.svc-lead{grid-column:span 2;border:2px solid var(--red);flex-direction:row}
+.svc-lead img{width:44%;height:auto;min-height:100%;flex:none}
+.svc-lead .svc-body{justify-content:center;padding:24px}
+.svc-lead h3{font-size:clamp(24px,2.4vw,30px)}
+.tag{align-self:flex-start;background:var(--red);color:var(--white);font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px}
+@media (max-width:1040px){.svc-grid{grid-template-columns:repeat(2,1fr)}.svc-lead{grid-column:span 2}}
+@media (max-width:620px){.svc-grid{grid-template-columns:1fr}.svc-lead{grid-column:span 1;flex-direction:column}.svc-lead img{width:100%;height:170px;min-height:0}}
+
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,62px);align-items:center}
+.about-media{position:relative}
+.about-media img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.about-badge{position:absolute;right:-18px;bottom:-18px;background:var(--red);color:var(--white);padding:18px 22px;text-align:center}
+.about-badge b{display:block;font-family:var(--display);font-size:44px;font-weight:800;line-height:1}
+.about-badge span{display:block;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;margin-top:4px}
+.ticks{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:13px}
+.ticks li{display:flex;align-items:center;gap:10px;font-size:15.5px}
+@media (max-width:860px){.about-grid{grid-template-columns:1fr}.about-badge{right:16px;bottom:-16px}.ticks{grid-template-columns:1fr}}
+
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.gal{position:relative;overflow:hidden;display:block}
+.gal img{width:100%;height:250px;object-fit:cover;transition:transform .4s}
+.gal:hover img{transform:scale(1.04)}
+.gal-cap{position:absolute;left:0;right:0;bottom:0;padding:14px 16px;background:rgba(10,42,78,.93);color:var(--white)}
+.gal-cap b{display:block;font-family:var(--display);font-size:19px;font-weight:700;text-transform:uppercase}
+.gal-cap span{display:block;font-size:12.5px;color:#C3CEDC;margin-top:2px}
+.gal.is-repair .gal-cap{background:rgba(216,30,40,.94)}
+.gal.is-repair .gal-cap span{color:#FFE0E2}
+.gal.w2{grid-column:span 2}
+.filters{display:flex;gap:10px;flex-wrap:wrap}
+.filters button{min-height:44px;padding:0 18px;background:var(--white);color:var(--slate);border:1px solid var(--line);font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--navy);color:var(--white);border-color:var(--navy)}
+@media (max-width:1000px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.gal-grid{grid-template-columns:1fr}.gal.w2{grid-column:span 1}.gal img{height:220px}}
+
+.areas{background:var(--soft)}
+.areas-grid{display:grid;grid-template-columns:360px minmax(0,1fr);gap:clamp(28px,5vw,62px)}
+.area-head{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:.14em;color:var(--navy);text-transform:uppercase;margin:26px 0 12px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+.area-head:first-child{margin-top:0}
+.area-head.key{color:var(--red)}
+.area-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px 18px;font-size:16px}
+.area-list a{color:var(--ink)}
+.area-list a:hover{color:var(--red)}
+.area-list a.key{color:var(--red);font-weight:700}
+@media (max-width:1000px){.areas-grid{grid-template-columns:1fr}.area-list{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.area-list{grid-template-columns:repeat(2,1fr)}}
+
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rev{border:1px solid var(--line);padding:28px 26px;display:flex;flex-direction:column;gap:14px}
+.rev p{font-size:16.5px;line-height:1.7;font-style:italic}
+.rev b{font-family:var(--display);font-size:18px;font-weight:700;color:var(--navy);text-transform:uppercase}
+.rev span{font-size:13.5px;color:var(--slate-light)}
+.stars{display:flex;gap:2px}
+@media (max-width:900px){.rev-grid{grid-template-columns:1fr}}
+
+.faq-list{max-width:900px;margin-inline:auto;display:flex;flex-direction:column;gap:12px}
+.faq{border:1px solid var(--line);background:var(--white)}
+.faq[data-open="true"]{border-left:4px solid var(--red)}
+.faq button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 22px;background:transparent;border:0;text-align:left;cursor:pointer;font-family:var(--display);font-size:clamp(19px,2.1vw,23px);font-weight:700;color:var(--navy);text-transform:uppercase}
+.faq .ico{flex:none;width:22px;height:22px;position:relative}
+.faq .ico::before,.faq .ico::after{content:"";position:absolute;background:var(--red);left:50%;top:50%;transform:translate(-50%,-50%)}
+.faq .ico::before{width:20px;height:3px}
+.faq .ico::after{width:3px;height:20px;transition:opacity .15s}
+.faq[data-open="true"] .ico::after{opacity:0}
+.faq-a{padding:0 22px 22px;font-size:16.5px;line-height:1.7;color:var(--slate)}
+
+.quote{background:var(--navy);color:var(--white)}
+.quote-grid{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:clamp(28px,5vw,62px);align-items:start}
+.quote h2{font-size:clamp(30px,4.4vw,50px);font-weight:700;line-height:1.04;color:var(--white)}
+.quote-lede{margin-top:16px;font-size:17.5px;line-height:1.65;color:#C3CEDC}
+.quote-ticks{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;font-size:16px}
+.quote-ticks li{display:flex;align-items:center;gap:11px}
+.contact-block{margin-top:26px;padding-top:24px;border-top:1px solid var(--navy-600);display:flex;flex-direction:column;gap:16px}
+.cb{display:flex;gap:12px;align-items:flex-start}
+.cb span{display:block;font-size:11.5px;letter-spacing:.18em;color:#7E93AB;text-transform:uppercase;margin-bottom:4px}
+.cb a,.cb p{font-size:16.5px;color:var(--white);line-height:1.5}
+.cb .tel{font-family:var(--display);font-size:30px;font-weight:800;line-height:1}
+form{background:var(--white);padding:clamp(24px,3vw,40px);color:var(--ink)}
+.f-row{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:18px}
+.f{display:flex;flex-direction:column;gap:7px}
+label{font-family:var(--display);font-size:15px;font-weight:700;letter-spacing:.1em;color:var(--navy);text-transform:uppercase}
+input,select,textarea{min-height:54px;padding:14px 16px;border:1.5px solid #D5DCE6;background:var(--white);font-family:var(--body);font-size:16px;color:var(--ink);width:100%}
+textarea{resize:vertical;min-height:96px}
+input:focus,select:focus,textarea:focus{border-color:var(--navy);outline:none;box-shadow:0 0 0 3px rgba(10,42,78,.12)}
+.upload{display:flex;align-items:center;gap:14px;padding:16px 18px;border:1.5px dashed #D5DCE6;background:var(--soft);margin-bottom:22px}
+.upload b{display:block;font-size:15.5px}
+.upload span{display:block;font-size:13.5px;color:var(--slate);margin-top:2px}
+form .btn{width:100%}
+.form-note{margin-top:14px;font-size:13.5px;color:var(--slate-light);text-align:center}
+.sent{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;padding:36px 10px}
+.sent h3{font-size:28px;color:var(--navy)}
+.sent p{font-size:16px;color:var(--slate);max-width:44ch}
+@media (max-width:900px){.quote-grid{grid-template-columns:1fr}.f-row{grid-template-columns:1fr}}
+
+.ftr{background:var(--ink);color:#9AA6B6;padding-top:clamp(40px,5vw,62px)}
+.ftr-grid{display:grid;grid-template-columns:330px repeat(3,1fr);gap:clamp(24px,4vw,42px);padding-bottom:42px;border-bottom:1px solid #262F3F}
+.ftr h3{font-size:17px;font-weight:700;letter-spacing:.14em;color:var(--white);margin-bottom:16px}
+.ftr ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:15px}
+.ftr a{color:#9AA6B6}
+.ftr a:hover{color:var(--white)}
+.ftr a.key{color:#FF8C93}
+.ftr-logo{width:190px;height:52px;object-fit:contain;object-position:left center;margin-bottom:18px;background:var(--white);padding:8px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badges span{padding:7px 12px;border:1px solid #333D4F;font-size:12px;letter-spacing:.08em;color:#C3CEDC;text-transform:uppercase}
+.ftr-tel{display:block;font-family:var(--display);font-size:29px;font-weight:700;color:var(--white);margin-bottom:12px}
+.ftr-btm{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:24px;font-size:13.5px;color:#6B7688}
+.ftr-btm a{color:#6B7688}
+@media (max-width:1000px){.ftr-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.ftr-grid{grid-template-columns:1fr}}
+
+.callbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:55;background:var(--red);padding:12px 16px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));gap:10px}
+.callbar a{flex:1;display:flex;align-items:center;justify-content:center;min-height:50px;font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--white);border:2px solid rgba(255,255,255,.55)}
+.callbar a.solid{background:var(--white);color:var(--red);border-color:var(--white)}
+@media (max-width:760px){.callbar{display:flex}body{padding-bottom:84px}}
+</style>
+
+<div class="util">
+  <div class="wrap">
+    <ul>
+      <li>Licensed, Bonded &amp; Insured</li>
+      <li>Family Owned in Chicago Since 1985</li>
+      <li>939 N. North Ave, Chicago, IL 60642</li>
+    </ul>
+    <span>Mon&ndash;Sat 8:00am&ndash;6:00pm &nbsp;|&nbsp; <a href="#quote">Free Consultation</a></span>
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="assets/logo.png" alt="Americana Iron Works and Fence" width="435" height="120"></a>
+    <nav class="nav">
+      <a class="is-key" href="#repair">Repair</a>
+      <a href="#services">Fence</a>
+      <a href="#services">Custom Ironworks</a>
+      <a href="#services">Fire Escapes</a>
+      <a href="#services">Structural Steel</a>
+      <a href="#services">Metal Painting</a>
+      <a href="#areas">Areas We Serve</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="tel-block" href="tel:3127226515"><span>Call us</span><strong>312-722-6515</strong></a>
+      <a class="btn btn-red" href="#quote">Free Quote</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mnav">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A2A4E" stroke-width="2.2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<nav class="mnav" id="mnav" data-open="false">
+  <ul>
+    <li><a href="#repair">Repair &amp; Restoration</a></li>
+    <li><a href="#services">Fence</a></li>
+    <li><a href="#services">Custom Ironworks</a></li>
+    <li><a href="#services">Fire Escapes</a></li>
+    <li><a href="#services">Structural Steel</a></li>
+    <li><a href="#services">Metal Painting</a></li>
+    <li><a href="#areas">Areas We Serve</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <div class="wrap"><a class="btn btn-red" href="#quote">Get a Free Quote</a></div>
+</nav>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Custom Commercial &amp; Residential Solutions</span>
+        <h1>Chicago Iron Repair, Restoration &amp; Custom Fabrication</h1>
+        <p>Around <strong>70% of what we do is rust removal and repair</strong>, not replacement. We have been fabricating, installing and saving Chicago ironwork since 1985, from wrought iron fences and gates to fire escapes, stairs and structural steel.</p>
+        <div class="hero-btns">
+          <a class="btn btn-red" href="#quote">Contact Us for a Free Consultation</a>
+          <a class="btn btn-ghost" href="tel:3127226515">312-722-6515</a>
+        </div>
+        <ul class="hero-ticks">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FD48F" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Licensed, Bonded &amp; Insured</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FD48F" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Free Consultation</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7FD48F" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Guaranteed Work</li>
+        </ul>
+      </div>
+      <div class="hero-media">
+        <img src="assets/iron-painting.jpg" alt="Americana crew repainting a wrought iron fence in Chicago" width="800" height="1067" fetchpriority="high">
+        <span class="badge-year"><b>1985</b><span>Serving Chicago<br>for 40 years.</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="wrap">
+      <div class="proof-item">
+        <div class="proof-num">40<span class="accent">+</span></div>
+        <div class="proof-lbl">Years of Experience</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">20,000<span class="accent">+</span></div>
+        <div class="proof-lbl">Jobs Completed</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">100%</div>
+        <div class="proof-lbl">Integrity</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect" id="repair">
+    <div class="wrap">
+      <div class="sect-head">
+        <div>
+          <span class="eyebrow">What We Do Most</span>
+          <h2 class="h2">Rust Removal, Repair &amp; Restoration</h2>
+          <p class="lede">Most of our work is not new installation. It is bringing existing ironwork back: grinding out rust, welding what has cracked, and refinishing so it holds through another round of Chicago winters. If the iron can be saved, saving it costs a fraction of tearing it out.</p>
+        </div>
+        <a class="btn btn-outline" href="#quote">Book an Assessment</a>
+      </div>
+
+      <div class="cards-3">
+        <article class="card">
+          <img src="assets/rust-before.jpg" alt="Rusted iron fence in East Ravenswood, Chicago before repair and painting" width="400" height="400">
+          <div class="card-body">
+            <h3>Rust Removal &amp; Priming</h3>
+            <p>We take corroded iron back to clean metal and prime it the same day, so the surface never sits open to the weather. This is the single most common job we run.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="assets/chain-repair.jpg" alt="Chain link fence repair in Chicago" width="200" height="200">
+          <div class="card-body">
+            <h3>On-Site Welding &amp; Repair</h3>
+            <p>Cracked joints, broken pickets, sagging gates and failed fire escape connections get repaired in place, so your ironwork does not leave the property.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="assets/iron-painted.jpg" alt="Repainted wrought iron fence in Hyde Park, Chicago" width="800" height="640">
+          <div class="card-body">
+            <h3>Refinishing &amp; Metal Painting</h3>
+            <p>Proper prep and industrial coatings on fences, porches, balconies and stairs, so the repair still looks right several winters from now.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="callout">
+        <div>
+          <h3>Already been told it needs replacing?</h3>
+          <p>Get a second opinion before you spend the money. We will tell you honestly when a repair will not hold, and quote the replacement if that is the right call.</p>
+        </div>
+        <a class="btn btn-red" href="#quote">Get a Second Opinion</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect" id="services" style="background:var(--soft)">
+    <div class="wrap">
+      <div class="center" style="margin-bottom:38px">
+        <span class="eyebrow">What We Do</span>
+        <h2 class="h2">Custom Commercial and Residential Solutions in Chicago</h2>
+      </div>
+      <div class="svc-grid">
+        <a class="svc svc-lead" href="#repair">
+          <img src="assets/iron-painting.jpg" alt="Wrought iron fence being repainted in Chicago" width="800" height="1067">
+          <div class="svc-body">
+            <span class="tag">Our Biggest Service</span>
+            <h3>Repair &amp; Restoration</h3>
+            <p>Rust removal, welding, structural repair and refinishing on fences, gates, railings, stairs and fire escapes. Around 70% of our work.</p>
+          </div>
+        </a>
+        <a class="svc" href="#quote">
+          <img src="assets/fabrication.jpg" alt="Custom wrought iron fabrication work" width="251" height="160">
+          <div class="svc-body"><h3>Custom Ironworks</h3><p>Custom pieces are one of the best ways to put personal flair on your home or establishment, starting with your fences and gates.</p></div>
+        </a>
+        <a class="svc" href="#quote">
+          <img src="assets/iron-fence.jpg" alt="Wrought iron fence installed in Chicago" width="400" height="299">
+          <div class="svc-body"><h3>Wrought Iron</h3><p>Known for durability, strength and beauty. We repair and install wrought iron fencing throughout Chicago.</p></div>
+        </a>
+        <a class="svc" href="#quote">
+          <img src="assets/fire-escape.jpg" alt="Multi-story steel fire escape on a Chicago building" width="600" height="800" style="object-position:center 28%">
+          <div class="svc-body"><h3>Fire Escapes</h3><p>Fully insured, licensed and bonded, we handle fire escapes of any magnitude, including code violation corrections.</p></div>
+        </a>
+        <a class="svc" href="#quote">
+          <img src="assets/gate-commercial.jpg" alt="Commercial wrought iron driveway gate" width="400" height="267">
+          <div class="svc-body"><h3>Commercial &amp; Residential Gates</h3><p>From modern designs to timeless classics, gates that combine style and security for any property.</p></div>
+        </a>
+        <a class="svc" href="#quote">
+          <img src="assets/wood-fence.jpg" alt="Wooden privacy fence installed in Chicago" width="400" height="300">
+          <div class="svc-body"><h3>Wooden Fences</h3><p>Durability and simplicity for home or business, with timeless charm and essential privacy.</p></div>
+        </a>
+        <a class="svc" href="#quote">
+          <img src="assets/balcony.jpg" alt="Iron balcony and railing installation in Chicago" width="768" height="576">
+          <div class="svc-body"><h3>Balconies &amp; Railings</h3><p>Porch, balcony and stair railings, repaired or fabricated to match what is already on the building.</p></div>
+        </a>
+        <a class="svc" href="#quote">
+          <img src="assets/stairs-spiral.jpg" alt="Custom iron spiral staircase fabricated in Chicago" width="400" height="533">
+          <div class="svc-body"><h3>Stairs &amp; Structural Steel</h3><p>Outdoor stairs, spiral staircases, metal stair repair, and structural steel fabrication and erection.</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect" id="about">
+    <div class="wrap about-grid">
+      <div class="about-media">
+        <img src="assets/gate-residential.jpg" alt="Residential wrought iron gate fabricated and installed by Americana" width="320" height="213">
+        <span class="about-badge"><b>40</b><span>Years in<br>Chicago</span></span>
+      </div>
+      <div>
+        <span class="eyebrow">About</span>
+        <h2 class="h2">Welcome to Americana Iron Works &amp; Fence</h2>
+        <p class="lede">Americana Fence believes in quality. We offer only those products that represent the greatest value to our customers, who we have been serving since <strong style="color:var(--red)">1985</strong>. Our services and products always offer something extra over our competitors: a higher satisfaction rate, guaranteed work, and prices that stay cost effective.</p>
+        <p class="lede">We are a family-owned Chicago shop with our own fabricators and our own crews, which is why we can weld a repair on site instead of scheduling you out for weeks.</p>
+        <ul class="ticks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D81E28" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Licensed, bonded and insured</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D81E28" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> In-house fabrication</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D81E28" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Work always guaranteed</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D81E28" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Free consultation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect" id="work">
+    <div class="wrap">
+      <div class="sect-head">
+        <div>
+          <span class="eyebrow">Our Work</span>
+          <h2 class="h2">Chicago Iron We Have Built and Saved</h2>
+        </div>
+        <div class="filters" id="filters">
+          <button type="button" data-f="all" aria-pressed="true">All</button>
+          <button type="button" data-f="repair" aria-pressed="false">Repair</button>
+          <button type="button" data-f="gates" aria-pressed="false">Gates &amp; Fence</button>
+          <button type="button" data-f="steel" aria-pressed="false">Stairs &amp; Steel</button>
+        </div>
+      </div>
+      <div class="gal-grid" id="galGrid">
+        <a class="gal w2 is-repair" href="#quote" data-cat="repair">
+          <img src="assets/rust-before.jpg" alt="Rusted iron fence before painting in East Ravenswood, Chicago" width="400" height="400">
+          <span class="gal-cap"><b>Rusted Fence, Before Repair</b><span>East Ravenswood</span></span>
+        </a>
+        <a class="gal is-repair" href="#quote" data-cat="repair">
+          <img src="assets/iron-painted.jpg" alt="Wrought iron fence after repainting in Hyde Park" width="800" height="640">
+          <span class="gal-cap"><b>Iron Fence, Refinished</b><span>Hyde Park</span></span>
+        </a>
+        <a class="gal is-repair" href="#quote" data-cat="repair steel">
+          <img src="assets/fire-escape-tall.png" alt="Multi-story fire escape in West Ridge, Chicago" width="200" height="263">
+          <span class="gal-cap"><b>Fire Escape Restoration</b><span>West Ridge</span></span>
+        </a>
+        <a class="gal" href="#quote" data-cat="gates">
+          <img src="assets/gate-wrought.jpg" alt="Wrought iron driveway gate in Chicago" width="320" height="185">
+          <span class="gal-cap"><b>Wrought Iron Gate</b><span>Chicago</span></span>
+        </a>
+        <a class="gal" href="#quote" data-cat="gates">
+          <img src="assets/gate-commercial.jpg" alt="Commercial wrought iron gate with stone pillars" width="400" height="267">
+          <span class="gal-cap"><b>Commercial Gate</b><span>Chicago</span></span>
+        </a>
+        <a class="gal" href="#quote" data-cat="steel">
+          <img src="assets/balcony.jpg" alt="Iron balcony railing in Chicago" width="768" height="576">
+          <span class="gal-cap"><b>Balcony &amp; Railing</b><span>Gold Coast</span></span>
+        </a>
+        <a class="gal" href="#quote" data-cat="steel">
+          <img src="assets/stairs-spiral.jpg" alt="Custom iron spiral staircase" width="400" height="533">
+          <span class="gal-cap"><b>Spiral Staircase</b><span>Chicago</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect areas" id="areas">
+    <div class="wrap areas-grid">
+      <div>
+        <span class="eyebrow">Areas We Service</span>
+        <h2 class="h2">Serving Chicago and the Suburbs</h2>
+        <p class="lede">We run crews across the city and the near suburbs. Each neighborhood below has its own page covering local fence, gate, ironwork and repair work.</p>
+        <p style="margin-top:22px"><a class="btn btn-navy" href="#quote">See All Service Areas</a></p>
+      </div>
+      <div>
+        <h3 class="area-head key">Downtown &amp; Near North</h3>
+        <ul class="area-list">
+          <li><a class="key" href="#areas">River North</a></li>
+          <li><a class="key" href="#areas">DePaul</a></li>
+          <li><a href="#areas">Gold Coast</a></li>
+          <li><a href="#areas">Old Town</a></li>
+          <li><a href="#areas">Streeterville</a></li>
+          <li><a href="#areas">Magnificent Mile</a></li>
+          <li><a href="#areas">Goose Island</a></li>
+          <li><a href="#areas">Ranch Triangle</a></li>
+        </ul>
+        <h3 class="area-head">North Side</h3>
+        <ul class="area-list">
+          <li><a href="#areas">Lincoln Park</a></li>
+          <li><a href="#areas">Lake View</a></li>
+          <li><a href="#areas">Wrigleyville</a></li>
+          <li><a href="#areas">Lincoln Square</a></li>
+          <li><a href="#areas">North Center</a></li>
+          <li><a href="#areas">Roscoe Village</a></li>
+          <li><a href="#areas">East Ravenswood</a></li>
+          <li><a href="#areas">Albany Park</a></li>
+          <li><a href="#areas">Rogers Park</a></li>
+          <li><a href="#areas">West Ridge</a></li>
+          <li><a href="#areas">North Park</a></li>
+          <li><a href="#areas">Buena Park</a></li>
+          <li><a href="#areas">Forest Glen</a></li>
+          <li><a href="#areas">North Halsted</a></li>
+          <li><a href="#areas">Sheffield Neighbors</a></li>
+          <li><a href="#areas">Horner Park</a></li>
+        </ul>
+        <h3 class="area-head">South, West &amp; Nearby</h3>
+        <ul class="area-list">
+          <li><a href="#areas">Hyde Park</a></li>
+          <li><a href="#areas">Bronzeville</a></li>
+          <li><a href="#areas">Chinatown</a></li>
+          <li><a href="#areas">Lackawanna</a></li>
+          <li><a href="#areas">Bucktown</a></li>
+          <li><a href="#areas">Wicker Park</a></li>
+          <li><a href="#areas">Jefferson Park</a></li>
+          <li><a href="#areas">O'Hare</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect">
+    <div class="wrap">
+      <div class="center" style="margin-bottom:36px">
+        <span class="eyebrow">Reviews</span>
+        <h2 class="h2">See What Our Happy Customers Have to Say</h2>
+          <p class="lede" style="margin-inline:auto">Real reviews from Chicago property owners and condo boards.</p>
+      </div>
+      <div class="rev-grid">
+        <article class="rev">
+          <div class="stars" aria-label="5 out of 5 stars"><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg></div>
+          <b style="font-size:20px">Great Experience</b>
+          <p>&ldquo;I was very lucky to find Americana Iron Works while searching online. Our building needed to have some immediate work done to our back staircase. Jessica was very pleasant to work with and best of all great fast communication. Mike came out and did the estimate. Gave us great pricing and was able to do the repairs earlier than expected. Great experience, highly recommended!&rdquo;</p>
+          <div><b>Lily D.</b></div>
+        </article>
+        <article class="rev">
+          <div class="stars" aria-label="5 out of 5 stars"><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg></div>
+          <b style="font-size:20px">Great to Work With</b>
+          <p>&ldquo;Americana was great to work with. Jessica in the office was very responsive and pleasant to work with. Our condo needed them to replace a post on our wrought iron fence, replace some rusted out exterior stairs and paint our entire fence. They were able to take care of both the post and stair replacement within days. And the new paint job looks great.&rdquo;</p>
+          <div><b>Colleen R.</b></div>
+        </article>
+        <article class="rev">
+          <div class="stars" aria-label="5 out of 5 stars"><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg><svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A62D" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 6.9-1z"/></svg></div>
+          <b style="font-size:20px">Excellent Job</b>
+          <p>&ldquo;We have a three story staircase and back porches that were rusted and in need of paint. Americana came out and sanded the rusted areas and determined what had to be replaced. They did an excellent job on the repair and the painting makes it look new. Excellent work and superb communication from the staff and office. Recommend highly.&rdquo;</p>
+          <div><b>Fred S.</b></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect" id="faq" style="background:var(--soft)">
+    <div class="wrap">
+      <div class="center" style="margin-bottom:34px">
+        <span class="eyebrow">Common Questions</span>
+        <h2 class="h2">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list" id="faqList">
+        <div class="faq" data-open="true">
+          <button type="button" aria-expanded="true">Can rusted iron be repaired, or does it need replacing?<span class="ico" aria-hidden="true"></span></button>
+          <div class="faq-a">In most cases it can be repaired. Surface rust grinds off and primes over, and even badly pitted iron usually has sound sections worth keeping. We splice in new material only where the metal has actually lost strength. When the base of a post or a structural connection is gone, replacement is the honest answer, and we will say so.</div>
+        </div>
+        <div class="faq" data-open="false">
+          <button type="button" aria-expanded="false">How long has Americana been in business?<span class="ico" aria-hidden="true"></span></button>
+          <div class="faq-a" hidden>Since 1985. We are a family-owned Chicago business with over 40 years of experience and more than 20,000 jobs completed.</div>
+        </div>
+        <div class="faq" data-open="false">
+          <button type="button" aria-expanded="false">Do you handle fire escape code violations?<span class="ico" aria-hidden="true"></span></button>
+          <div class="faq-a" hidden>Yes. We are fully insured, licensed and bonded, and we handle fire escapes of any magnitude, including inspection, repair, repainting and correcting city code violations.</div>
+        </div>
+        <div class="faq" data-open="false">
+          <button type="button" aria-expanded="false">Do you fabricate custom ironwork?<span class="ico" aria-hidden="true"></span></button>
+          <div class="faq-a" hidden>Yes. Custom pieces are one of the best ways to put personal flair on a home or business, and we fabricate gates, fences, railings and stairs in house rather than ordering stock and marking it up.</div>
+        </div>
+        <div class="faq" data-open="false">
+          <button type="button" aria-expanded="false">What areas of Chicago do you serve?<span class="ico" aria-hidden="true"></span></button>
+          <div class="faq-a" hidden>We work across Chicago and the near suburbs, from Rogers Park and West Ridge down through Hyde Park and Bronzeville, and out to Oak Park and the North Shore. See the Areas We Service section above for the neighborhood list.</div>
+        </div>
+        <div class="faq" data-open="false">
+          <button type="button" aria-expanded="false">Is the work guaranteed?<span class="ico" aria-hidden="true"></span></button>
+          <div class="faq-a" hidden>Yes. Our services and products are always guaranteed, and we are licensed, bonded and insured. Certificates are available before work starts if your building or property manager needs them on file.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sect quote" id="quote">
+    <div class="wrap quote-grid">
+      <div>
+        <h2>Contact Us for a Free Consultation</h2>
+        <p class="quote-lede">Questions about our services? Need to know more about our installation process or available pricing? Send a photo of the rust, the crack or the sagging gate and we will tell you whether it is a repair or a replacement before anyone comes out.</p>
+        <ul class="quote-ticks">
+          <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFB4B8" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Free, no-obligation consultation</li>
+          <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFB4B8" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Repair priced next to replacement</li>
+          <li><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#FFB4B8" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Work always guaranteed</li>
+        </ul>
+        <div class="contact-block">
+          <div class="cb">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFB4B8" stroke-width="2" aria-hidden="true" style="flex:none;margin-top:4px"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            <div><span>Contact</span><a class="tel" href="tel:3127226515">312-722-6515</a></div>
+          </div>
+          <div class="cb">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFB4B8" stroke-width="2" aria-hidden="true" style="flex:none;margin-top:4px"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><span>Address</span><p>939 N. North Ave<br>Chicago, IL 60642</p></div>
+          </div>
+          <div class="cb">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFB4B8" stroke-width="2" aria-hidden="true" style="flex:none;margin-top:4px"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <div><span>Business Hours</span><p>Monday to Saturday<br>8:00am to 6:00pm</p></div>
+          </div>
+        </div>
+      </div>
+
+      <form id="quoteForm" novalidate>
+        <div id="formFields">
+          <div class="f-row">
+            <div class="f"><label for="fullname">Full Name</label><input id="fullname" name="fullname" type="text" placeholder="Jane Kowalski" autocomplete="name"></div>
+            <div class="f"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="(312) 555-0148" autocomplete="tel"></div>
+          </div>
+          <div class="f-row">
+            <div class="f"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@email.com" autocomplete="email"></div>
+            <div class="f"><label for="service">What Do You Need?</label>
+              <select id="service" name="service">
+                <option>Rust removal, repair or restoration</option>
+                <option>Custom ironworks</option>
+                <option>Wrought iron fence</option>
+                <option>Fire escape or code violation</option>
+                <option>Commercial or residential gate</option>
+                <option>Wooden or vinyl fence</option>
+                <option>Balconies and railings</option>
+                <option>Stairs or structural steel</option>
+                <option>Metal painting</option>
+              </select>
+            </div>
+          </div>
+          <div class="f" style="margin-bottom:18px"><label for="details">Tell Us About the Job</label><textarea id="details" name="details" rows="3" placeholder="Back porch railing, rusted at the base, three-flat in Lincoln Park."></textarea></div>
+          <div class="upload">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D81E28" stroke-width="1.9" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+            <div><b>Add photos of the damage</b><span>This is what gets you a faster, more accurate number.</span></div>
+          </div>
+          <button class="btn btn-red" type="submit">Request My Free Consultation</button>
+          <p class="form-note">We reply within one business day.</p>
+        </div>
+        <div class="sent" id="formSent" hidden>
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#D81E28" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>
+          <h3>Request Received</h3>
+          <p>Design preview only, so nothing was actually sent. On the live site this is where the confirmation would appear.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div>
+        <img class="ftr-logo" src="assets/logo.png" alt="Americana Iron Works and Fence" width="435" height="120">
+        <p style="font-size:15.5px;line-height:1.7">Americana Fence believes in quality and offers only those products which represent the greatest value to our customers, who we have been serving since 1985.</p>
+        <div class="badges"><span>Licensed</span><span>Bonded</span><span>Insured</span><span>Guaranteed</span></div>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#quote">Contact</a></li>
+          <li><a href="#areas">Areas We Service</a></li>
+          <li><a href="#services">Code Violations</a></li>
+          <li><a href="#top">Blog</a></li>
+          <li><a href="#top">Privacy Policy</a></li>
+          <li><a href="#top">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a class="key" href="#repair">Fence Repair in Chicago</a></li>
+          <li><a href="#services">Fence Installation in Chicago</a></li>
+          <li><a href="#services">Iron Gate Repair in Chicago</a></li>
+          <li><a href="#services">Iron Fence in Chicago</a></li>
+          <li><a href="#services">Outdoor Stairs in Chicago</a></li>
+          <li><a href="#services">Metal Stairs Repair in Chicago</a></li>
+          <li><a href="#services">Metal Stair Railing in Chicago</a></li>
+          <li><a href="#services">Chicago Vinyl Fence</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Quick Contact</h3>
+        <a class="ftr-tel" href="tel:3127226515">312-722-6515</a>
+        <p style="font-size:15px;line-height:1.8">939 N. North Ave<br>Chicago, IL 60642</p>
+        <p style="margin-top:14px;font-size:15px;line-height:1.8">Mon, Tu, We, Th, Fr, Sa<br>8:00am &ndash; 6:00pm</p>
+      </div>
+    </div>
+    <div class="ftr-btm">
+      <span>&copy;2026 Americana Iron Works And Fence&reg;. All rights reserved.</span>
+      <span style="display:flex;gap:22px"><a href="#top">Privacy Policy</a><a href="#top">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="callbar">
+  <a class="solid" href="tel:3127226515">Call Now</a>
+  <a href="#quote">Free Quote</a>
+</div>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),mnav=document.getElementById('mnav');
+  burger.addEventListener('click',function(){
+    var open=mnav.getAttribute('data-open')==='true';
+    mnav.setAttribute('data-open',open?'false':'true');
+    burger.setAttribute('aria-expanded',open?'false':'true');
+  });
+  mnav.addEventListener('click',function(e){
+    if(e.target.closest('a')){mnav.setAttribute('data-open','false');burger.setAttribute('aria-expanded','false');}
+  });
+
+
+  document.getElementById('faqList').addEventListener('click',function(e){
+    var btn=e.target.closest('button');if(!btn)return;
+    var item=btn.parentElement,open=item.getAttribute('data-open')==='true';
+    item.setAttribute('data-open',open?'false':'true');
+    btn.setAttribute('aria-expanded',open?'false':'true');
+    item.querySelector('.faq-a').hidden=open;
+  });
+
+  var filters=document.getElementById('filters'),grid=document.getElementById('galGrid');
+  filters.addEventListener('click',function(e){
+    var btn=e.target.closest('button');if(!btn)return;
+    var f=btn.getAttribute('data-f');
+    filters.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b===btn?'true':'false');});
+    grid.querySelectorAll('.gal').forEach(function(c){
+      var cats=(c.getAttribute('data-cat')||'').split(' ');
+      c.hidden=!(f==='all'||cats.indexOf(f)!==-1);
+    });
+  });
+
+  document.getElementById('quoteForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    document.getElementById('formFields').hidden=true;
+    document.getElementById('formSent').hidden=false;
+  });
+})();
+</script>
